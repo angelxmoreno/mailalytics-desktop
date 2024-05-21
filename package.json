@@ -8,15 +8,18 @@
         "build": "tsc && vite build",
         "preview": "vite preview",
         "tauri": "tauri",
-        "pretty": "bun prettier --write **/*.json",
+        "pretty": "bun prettier --write *.json **/*.json",
         "prepare": "[ -d .git ] && husky install || echo 'Skipping Husky install'",
         "commitlint": "commitlint --edit",
         "lint": "eslint src/** --max-warnings 0",
         "lint:fix": "eslint src/** --fix --cache"
     },
     "dependencies": {
-        "@tauri-apps/api": ">=2.0.0-beta.0",
+        "@mdi/js": "^7.4.47",
+        "@mdi/react": "^1.6.1",
+        "@tauri-apps/api": "^1.5.6",
         "@tauri-apps/plugin-shell": ">=2.0.0-beta.0",
+        "axios": "^1.7.2",
         "bootstrap": "^5.3.3",
         "date-fns": "^3.6.0",
         "kysely": "^0.27.3",
@@ -25,6 +28,7 @@
         "react-bootstrap": "^2.10.2",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.23.1",
+        "react-social-login-buttons": "^4.1.0",
         "zustand": "^4.5.2"
     },
     "devDependencies": {
@@ -40,6 +44,7 @@
         "kysely-codegen": "^0.15.0",
         "lint-staged": "^15.2.2",
         "prettier": "^3.2.5",
+        "sass": "^1.77.2",
         "typescript": "^5.0.2",
         "vite": "^5.0.0",
         "vite-tsconfig-paths": "^4.3.2"
