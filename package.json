@@ -10,17 +10,33 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "@tauri-apps/api": ">=2.0.0-beta.0",
-    "@tauri-apps/plugin-shell": ">=2.0.0-beta.0"
+    "@tauri-apps/plugin-shell": ">=2.0.0-beta.0",
+    "bootstrap": "^5.3.3",
+    "date-fns": "^3.6.0",
+    "kysely": "^0.27.3",
+    "kysely-dialect-tauri": "^0.6.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@tauri-apps/cli": ">=2.0.0-beta.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^9.3.0",
+    "eslint-config-universe": "^12.1.0",
+    "husky": "^9.0.11",
+    "kysely-codegen": "^0.15.0",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
     "typescript": "^5.0.2",
     "vite": "^5.0.0",
-    "@tauri-apps/cli": ">=2.0.0-beta.0"
+    "vite-tsconfig-paths": "^4.3.2"
   }
 }
