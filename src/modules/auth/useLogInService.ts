@@ -13,21 +13,31 @@ export const useLogInService = () => {
     const [isPolling, setIsPolling] = useState(false);
     const [error, setError] = useState<Error | undefined>(undefined);
     const { login } = useAuthStore();
+
     const init = async () => {
-        const { data } = await http.get<CodeResponse>('/auth/login');
-        await open(data.url);
-        await startPolling(data);
+        try {
+            const { data } = await http.get<CodeResponse>('/auth/login');
+            await open(data.url);
+            setIsPolling(true);
+            await startPolling(data, Date.now());
+        } catch (e) {
+            const err = e as Error;
+            setError(err);
+            console.error(`Unable to init login service due to "${err.message}"`, err);
+        }
     };
 
-    const startPolling = async ({ pollTicket, jwt }: CodeResponse) => {
-        setIsPolling(true);
-        setError(undefined);
-
+    const startPolling = async ({ pollTicket, jwt }: CodeResponse, startTime: number) => {
         const timeout = 5 * 60 * 1000; // 5 minutes
         const interval = 5000; // 5 seconds
-        const endTime = Date.now() + timeout;
 
-        while (Date.now() < endTime) {
+        const poll = async () => {
+            if (Date.now() - startTime >= timeout) {
+                setIsPolling(false);
+                setError(new Error('Polling timed out'));
+                return;
+            }
+
             try {
                 const { data, status } = await http.request({
                     method: 'post',
@@ -57,10 +67,10 @@ export const useLogInService = () => {
                 return;
             }
 
-            await new Promise(resolve => setTimeout(resolve, interval));
-        }
+            setTimeout(poll, interval);
+        };
 
-        setIsPolling(false);
+        await poll();
     };
 
     return { isPolling, error, init };
